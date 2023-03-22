@@ -129,7 +129,7 @@ class HBNBCommand(cmd.Cmd):
             if not value:
                 continue
             if value[0] == '"' and value[-1] == '"' and len(value) > 1:
-                value1 = value[1:-2].replace('_', ' ')
+                value1 = value[1:-1].replace('_', ' ')
                 if '"' in value1:
                     value = value1.split('"')
                     value = value1.replace('\\"', '"')
@@ -244,7 +244,7 @@ class HBNBCommand(cmd.Cmd):
         print(count)
 
     def help_count(self):
-        """ """
+        """ Counts"""
         print("Usage: count <class_name>")
 
     def do_update(self, args):
