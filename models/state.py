@@ -19,7 +19,7 @@ class State(BaseModel, Base):
     @property
     def cities(self, id):
         c_list = []
-        city = storage.all(City)
+        city = models.storage.all(City)
         for key, value in city.items():
             if value.state_id == id:
                 c_list.append(value.name)
