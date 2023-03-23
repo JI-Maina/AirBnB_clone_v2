@@ -15,6 +15,7 @@ class FileStorage:
     """
 
     def all(self, cls=None):
+        """Returns the list of objects of one type of class"""
         if cls:
             filter_objs = {}
             for key, value in FileStorage.__objects.items():
