@@ -8,11 +8,6 @@ class FileStorage:
     __file_path = 'file.json'
     __objects = {}
 
-    """
-    def all(self):
-        Returns a dictionary of models currently in storage
-        return FileStorage.__objects
-    """
 
     def all(self, cls=None):
         """Returns the list of objects of one type of class"""
@@ -21,7 +16,7 @@ class FileStorage:
             for key, value in FileStorage.__objects.items():
                 if (value.__class__.__name__ == cls):
                     filter_objs.update({key:value})
-            return (filter_objs)
+                return (filter_objs)
         else:
             return FileStorage.__objects
 
