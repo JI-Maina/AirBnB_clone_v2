@@ -123,7 +123,7 @@ class HBNBCommand(cmd.Cmd):
             return
         kwargs = {}
         for arg in args.split()[1:]:
-            if '=' in arg:
+            if "=" in arg:
                 continue
             key, value = arg.split("=", 1)
             if not value:
