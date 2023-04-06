@@ -13,28 +13,29 @@ def do_deploy(archive_path):
 
     if os.path.exists(archive_path):
         # grab the file name
-        file_path = archive_path[9:]
+        file = archive_path.split("/")[-1]
 
         # create new path
-        new_path = "/data/web_static/releases/" + file_path[:-4]
-        filed_path = "/tmp/" + file_path
+        new_path = file.split(".")[0]
 
         # upload archive to /tmp/
-        put("archive_path, /tmp/")
+        put("archive_path, /tmp/{}".format(file))
 
-        run("mdir -p {}".format(new_path))
+        run("rm -rf /data/web_static/releases/{}/".format(name))
 
-        run("tar -xzf {} -C {}/".format(filed_path, new_path))
+        run("mdir -p /data/web_static/releases/{}/".format(name))
 
-        run("rm {}".format(filed_path))
+        run("tar -xzf /tmp/{} -C /data/web_static/releases/{}/".format(file, name))
 
-        run("mv {}/web_static/* {}".format(new_path, new_path))
+        run("rm /tmp/{}".format(file))
 
-        run("rm -rf {}/web_static".format(new_path))
+        run("mv /data/web_static/releases/{}/web_static/* /data/web_static/releases/{}/".format(name, name))
+
+        run("rm -rf /data/web_static/releases/{}/web_static".format(name))
 
         run("rm -rf /data/web_static/current")
 
-        run("ln -s {} /data/web_static/current".format(new_path))
+        run("ln -s /data/web_static/releases/{}/ /data/web_static/current".format(name))
 
         return True
     else:
