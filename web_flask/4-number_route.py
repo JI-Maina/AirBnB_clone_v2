@@ -43,11 +43,10 @@ def python(text="is cool"):
     return "Python {}".format(text)
 
 
-@app.route('/number/<n>', strict_slashes=False)
+@app.route('/number/<int:n>', strict_slashes=False)
 def number(n):
     """Display 'n is a number' only if n is an integer"""
-    if isinstance(n, int) == 'True':
-        return "{} is a number".format(n)
+    return "{} is a number".format(n)
 
 
 if __name__ == "__main__":
